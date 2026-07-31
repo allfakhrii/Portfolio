@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <link rel="icon" type="image/png" href="/assets/icon-B0CgT_T3.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Fakhri | Front-End Developer</title>
+    <!-- Compiled Tailwind CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+  <script type="module" crossorigin src="/assets/index-TyGXT-Ui.js"></script>
+</head>
+
+<body class="bg-[#09090b] text-zinc-100 font-sans antialiased selection:bg-blue-500/30 overflow-x-hidden">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content relative">
+            <!-- Bursting Logos -->
+            <div id="burst-container" class="absolute inset-0 pointer-events-none flex items-center justify-center">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+                    class="burst-logo" style="--tx: -210px; --ty: -120px; --tr: -35deg; --d: 0.1s;" alt="">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+                    class="burst-logo" style="--tx: 280px; --ty: -180px; --tr: 45deg; --d: 0.2s;" alt="">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
+                    class="burst-logo" style="--tx: -130px; --ty: -250px; --tr: 15deg; --d: 0.3s;" alt="">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
+                    class="burst-logo" style="--tx: 190px; --ty: -210px; --tr: -25deg; --d: 0.15s;" alt="">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg"
+                    class="burst-logo" style="--tx: -40px; --ty: -190px; --tr: 60deg; --d: 0.25s;" alt="">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
+                    class="burst-logo" style="--tx: 110px; --ty: -270px; --tr: -15deg; --d: 0.35s;" alt="">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
+                    class="burst-logo" style="--tx: -300px; --ty: -80px; --tr: 20deg; --d: 0.05s;" alt="">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
+                    class="burst-logo" style="--tx: 250px; --ty: -60px; --tr: -40deg; --d: 0.4s;" alt="">
+            </div>
+
+            <div class="loader-text text-white">
+                <span>Al-Fakhri</span>
+            </div>
+            <div class="loader-bar-container">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Background Glow -->
+    <div
+        class="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(59,130,246,0.15),rgba(255,255,255,0))]">
+    </div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex-shrink-0">
+                    <a href="#" class="font-heading font-bold text-2xl tracking-tighter">
+                        Al-Fakhri<span class="text-blue-500">.</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home"
+                            class="text-gray-300 hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about"
+                            class="text-gray-300 hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#works"
+                            class="text-gray-300 hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">Selected
+                            Works</a>
+                        <a href="#arsenal"
+                            class="text-gray-300 hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">My
+                            Arsenal</a>
+                        <a href="#contact"
+                            class="text-gray-300 hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-white transition-colors">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Fullscreen Overlay -->
+        <div id="mobile-menu" class="md:hidden">
+            <!-- Background Decoration -->
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-500/20 rounded-full blur-[100px] -z-10 animate-pulse">
+            </div>
+
+            <div class="mobile-link-container">
+                <a href="#home" class="mobile-link">Home</a>
+            </div>
+            <div class="mobile-link-container">
+                <a href="#about" class="mobile-link">About</a>
+            </div>
+            <div class="mobile-link-container">
+                <a href="#works" class="mobile-link">Works</a>
+            </div>
+            <div class="mobile-link-container">
+                <a href="#arsenal" class="mobile-link">Arsenal</a>
+            </div>
+            <div class="mobile-link-container">
+                <a href="#contact" class="mobile-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- HERO SECTION -->
+        <section id="home" class="min-h-screen relative flex items-center pt-20 overflow-hidden">
+            <!-- Background Blob -->
+            <div
+                class="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] mix-blend-screen opacity-50 animate-blob">
+            </div>
+            <div class="absolute bottom-1/4 -right-1/4 w-[400px] h-[400px] bg-emerald-500/20 rounded-full blur-[100px] mix-blend-screen opacity-50 animate-blob"
+                style="animation-delay: 2s;"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+
+                    <div class="flex-1 text-center lg:text-left fade-up">
+                        <div
+                            class="inline-flex items-center px-4 py-2 rounded-full glass-card border-white/10 mb-6 group cursor-default">
+                            <span class="relative flex h-3 w-3 mr-3">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                            </span>
+                            <span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+                                👋 Hi, I'm Al-Fakhri. Available for work.
+                            </span>
+                        </div>
+
+                        <h1
+                            class="text-4xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[1.1] tracking-tight mb-8">
+                            Crafting Digital Experiences That <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-300">Speak</span>
+                            for Your Brand.
+                        </h1>
+
+                        <p class="text-lg sm:text-xl text-gray-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            A passionate Front-end Developer and the Founder of Landexafy. While my background is in
+                            Data Science, my true calling lies in transforming complex ideas into elegant, responsive,
+                            and high-performing websites.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <a href="#works"
+                                class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded-xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] group scale-in delay-400">
+                                View My Work
+                                <i data-lucide="arrow-right"
+                                    class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                            <a href="#contact"
+                                class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white glass-card hover:bg-white/10 rounded-xl transition-all duration-300 scale-in delay-500">
+                                <i data-lucide="mail" class="mr-2 h-5 w-5"></i>
+                                Let's Collaborate
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Code Snippet Illusion -->
+                    <div class="flex-1 w-full max-w-lg lg:max-w-none relative scale-in delay-300">
+                        <div class="glass-card rounded-2xl p-6 border border-white/10 relative overflow-hidden group">
+                            <!-- Window Controls -->
+                            <div class="flex justify-between items-center mb-6 border-b border-white/5 pb-4">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                </div>
+                                <div class="text-xs text-gray-500 font-mono">al-fakhri-portfolio/Main.js</div>
+                            </div>
+
+                            <!-- Code Snippet -->
+                            <div
+                                class="font-mono text-sm sm:text-base selection:bg-blue-500/30 text-gray-300 overflow-x-auto">
+                                <div class="flex"><span class="text-gray-600 mr-4 select-none">1</span><span
+                                        class="text-purple-400">const</span> <span
+                                        class="text-blue-400">developer</span> <span class="text-gray-400">=</span> {
+                                </div>
+                                <div class="flex"><span class="text-gray-600 mr-4 select-none">2</span><span
+                                        class="ml-4 text-gray-300">name:</span> <span
+                                        class="text-green-400">'Al-Fakhri'</span>,</div>
+                                <div class="flex"><span class="text-gray-600 mr-4 select-none">3</span><span
+                                        class="ml-4 text-gray-300">role:</span> <span class="text-green-400">'Front-end
+                                        Engineer & Data Scientist'</span>,</div>
+                                <div class="flex"><span class="text-gray-600 mr-4 select-none">4</span><span
+                                        class="ml-4 text-gray-300">founder:</span> <span
+                                        class="text-blue-400">true</span>, <span class="text-gray-500">//
+                                        Landexafy</span></div>
+                                <div class="flex"><span class="text-gray-600 mr-4 select-none">5</span><span
+                                        class="ml-4 text-gray-300">skills:</span> [</div>
+                                <div class="flex"><span class="text-gray-600 mr-4 select-none">6</span><span
+                                        class="ml-8 text-green-400">'HTML/CSS'</span>, <span
+                                        class="text-green-400">'Tailwind'</span>, <span
+                                        class="text-green-400">'JS'</span></div>
+                                <div class="flex"><span class="text-gray-600 mr-4 select-none">7</span><span
+                                        class="ml-4 text-gray-300">]</span></div>
+                                <div class="flex"><span class="text-gray-600 mr-4 select-none">8</span><span
+                                        class="text-gray-300">}</span>;</div>
+                                <div class="flex mt-4"><span class="text-gray-600 mr-4 select-none">9</span><span
+                                        class="text-purple-400">export default</span> <span
+                                        class="text-blue-400">developer</span>;</div>
+                            </div>
+
+                            <div
+                                class="absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-16 fade-up">
+                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-4">The Journey So Far.</h2>
+                    <div class="w-20 h-1 bg-blue-500 rounded-full"></div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6 text-lg text-gray-400 leading-relaxed fade-up order-2 lg:order-1">
+                        <p>
+                            My journey into technology began at MAN Purbalingga, where my curiosity for how things work
+                            first took root. Today, as a <span class="text-white font-medium">Data Science student at
+                                Telkom University Purwokerto</span>, I've developed a strong analytical mindset and a
+                            deep understanding of logical problem-solving.
+                        </p>
+                        <p>
+                            However, I realized that even the best logic needs a beautiful interface to truly make an
+                            impact. That realization led me to dive deep into Front-end Development and establish <span
+                                class="text-blue-500 font-semibold">Landexafy</span>.
+                        </p>
+                        <p>
+                            My team and I focus on helping businesses translate their visions into digital products that
+                            are not only aesthetically pleasing but also highly functional and user-centric.
+                        </p>
+
+                        <div class="pt-6 grid grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-3xl font-heading font-bold text-white mb-2 counter" data-target="2">0
+                                </h4>
+                                <p class="text-sm text-gray-500 uppercase tracking-wider">Years Experience</p>
+                            </div>
+                            <div>
+                                <h4 class="text-3xl font-heading font-bold text-white mb-2 counter" data-target="10">0
+                                </h4>
+                                <p class="text-sm text-gray-500 uppercase tracking-wider">Projects Completed</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative scale-in delay-200 max-w-[320px] mx-auto lg:ml-auto group order-1 lg:order-2">
+                        <!-- Profile Image with Organic Shape -->
+                        <div
+                            class="aspect-square blob-shape blob-shape-hover glass p-1 relative z-10 overflow-hidden transition-all duration-700">
+                            <div
+                                class="w-full h-full bg-zinc-800 rounded-[inherit] overflow-hidden relative border border-white/5">
+                                <img src="/assets/PP-CSwnpRMi.png" alt="Founder's Portrait"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Decorative Ornaments -->
+                        <div
+                            class="absolute top-3 -right-3 w-full h-full border border-blue-500/20 blob-shape blob-shape-hover -z-10 transition-all duration-700">
+                        </div>
+                        <div class="absolute -bottom-6 left-6 w-3/4 h-3/4 bg-blue-500/10 blur-3xl rounded-full -z-20">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORKS SECTION -->
+        <section id="works" class="py-24 relative bg-zinc-950/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="mb-16 text-center md:text-left fade-up">
+                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-4">Selected Works.</h2>
+                    <p class="text-gray-400 text-lg">Showcasing web projects built for real clients.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[320px]">
+
+                    <!-- Project 1 -->
+                    <div
+                        class="glass-card p-8 flex flex-col group relative overflow-hidden md:col-span-2 lg:col-span-2 fade-up">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div class="relative z-10 flex-1 flex flex-col">
+                            <div class="flex justify-between items-start mb-4">
+                                <p class="text-blue-500 text-sm font-mono">Lead Front-end Developer & UX Engineer</p>
+                                <a href="https://luluthasrie.netlify.app/"
+                                    class="text-gray-400 hover:text-white transition-colors"><i
+                                        data-lucide="external-link" class="w-5 h-5"></i></a>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold font-heading mb-3 group-hover:text-blue-500 transition-colors">
+                                Client Landing Page</h3>
+                            <p class="text-gray-400 text-sm mb-6 flex-1 text-balance">Spearheaded the development of a
+                                dynamic, high-conversion landing page for a corporate client. Focused on delivering a
+                                seamless user experience with responsive design and smooth micro-interactions.</p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">HTML/CSS</span>
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">JS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="glass-card p-8 flex flex-col group relative overflow-hidden fade-up delay-100">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div class="relative z-10 flex-1 flex flex-col">
+                            <div class="flex justify-between items-start mb-4">
+                                <p class="text-blue-500 text-sm font-mono">Lead Front-end Developer & UX Engineer</p>
+                                <a href="https://cantikasejatieyelashes.com/"
+                                    class="text-gray-400 hover:text-white transition-colors"><i
+                                        data-lucide="external-link" class="w-5 h-5"></i></a>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold font-heading mb-3 group-hover:text-blue-500 transition-colors">
+                                Company Profile</h3>
+                            <p class="text-gray-400 text-sm mb-6 flex-1 text-balance">Designed and developed a modern
+                                company profile website. Optimized performance for sub-second load times.</p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">HTML/CSS</span>
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">JS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="glass-card p-8 flex flex-col group relative overflow-hidden fade-up delay-200">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div class="relative z-10 flex-1 flex flex-col">
+                            <div class="flex justify-between items-start mb-4">
+                                <p class="text-blue-500 text-sm font-mono">Lead Front-end Developer & UX Engineer</p>
+                                <a href="https://landexafy.netlify.app/"
+                                    class="text-gray-400 hover:text-white transition-colors"><i
+                                        data-lucide="external-link" class="w-5 h-5"></i></a>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold font-heading mb-3 group-hover:text-blue-500 transition-colors">
+                                Landexafy Official Site</h3>
+                            <p class="text-gray-400 text-sm mb-6 flex-1 text-balance">The official web presence for
+                                Landexafy, designed to convert leads and showcase our portfolio of digital products.</p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">HTML/CSS</span>
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">JS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div
+                        class="glass-card p-8 flex flex-col group relative overflow-hidden md:col-span-2 lg:col-span-2 fade-up delay-300">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div class="relative z-10 flex-1 flex flex-col">
+                            <div class="flex justify-between items-start mb-4">
+                                <p class="text-blue-500 text-sm font-mono">Lead Front-end Developer & UX Engineer</p>
+                                <a href="https://seabiru.netlify.app/"
+                                    class="text-gray-400 hover:text-white transition-colors"><i
+                                        data-lucide="external-link" class="w-5 h-5"></i></a>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold font-heading mb-3 group-hover:text-blue-500 transition-colors">
+                                Research Project</h3>
+                            <p class="text-gray-400 text-sm mb-6 flex-1 text-balance">Built an interactive web interface
+                                for marine research data, prioritizing clean code architecture, maintainability, and
+                                seamless data visualization.</p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">HTML/CSS</span>
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
+                                <span
+                                    class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">JS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TECH STACK (ARSENAL) SECTION -->
+        <section id="arsenal" class="pt-24 pb-12 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="mb-16 fade-up">
+                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-4">My Arsenal.</h2>
+                    <p class="text-gray-400 text-lg">The tools and technologies I use to build scalable web solutions.
+                    </p>
+                </div>
+
+                <!-- Bento Box Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 auto-rows-auto md:auto-rows-[320px]">
+
+                    <!-- Big Box 1: Core Front-end -->
+                    <div class="lg:col-span-3 glass-card p-8 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <i data-lucide="code-2" class="w-32 h-32 text-blue-500"></i>
+                        </div>
+                        <div class="relative z-10 h-full flex flex-col justify-center">
+                            <h3 class="text-3xl font-heading font-bold mb-3 text-white">Core Front-end</h3>
+                            <p class="text-gray-400 mb-6 max-w-sm">Building solid foundations with modern JavaScript
+                                paradigms and structural semantics.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="bg-blue-500/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium text-white">JavaScript</span>
+                                <span
+                                    class="bg-blue-500/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium text-white">HTML5
+                                    / CSS3</span>
+                                <span
+                                    class="bg-blue-500/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium text-white">Tailwind
+                                    CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Big Box 2: Core Data Science -->
+                    <div class="lg:col-span-3 glass-card p-8 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <i data-lucide="database" class="w-32 h-32 text-emerald-500"></i>
+                        </div>
+                        <div class="relative z-10 h-full flex flex-col justify-center">
+                            <h3 class="text-3xl font-heading font-bold mb-3 text-white">Core Data Science</h3>
+                            <p class="text-gray-400 mb-6 max-w-sm">Transforming raw data into actionable insights
+                                through robust analysis and high-performance computing.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="bg-yellow-500/10 text-yellow-500 px-4 py-2 rounded-lg text-sm font-medium text-white">Python
+                                    (Pandas, Scikit)</span>
+                                <span
+                                    class="bg-blue-400/10 text-blue-400 px-4 py-2 rounded-lg text-sm font-medium text-white">R
+                                    Language</span>
+                                <span
+                                    class="bg-cyan-500/10 text-cyan-500 px-4 py-2 rounded-lg text-sm font-medium text-white">Golang</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marquee: Programming Logos Loop -->
+                    <div class="lg:col-span-6 mt-6 overflow-hidden py-6"
+                        style="opacity: 1 !important; visibility: visible !important; display: block !important;">
+                        <div class="marquee-container">
+                            <div class="marquee-content">
+                                <!-- Group 1 -->
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+                                        alt="Python"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg"
+                                        alt="Pandas"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg"
+                                        alt="NumPy"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg"
+                                        alt="Go"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/r/r-original.svg"
+                                        alt="R"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+                                        alt="JS"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
+                                        alt="React"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
+                                        alt="Tailwind"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
+                                        alt="Node.js"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg"
+                                        alt="Vite"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
+                                        alt="PostgreSQL"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"
+                                        alt="MySQL"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
+                                        alt="Docker"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg"
+                                        alt="Git"></div>
+
+                                <!-- Group 2 (Duplicate) -->
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+                                        alt="Python"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg"
+                                        alt="Pandas"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg"
+                                        alt="NumPy"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg"
+                                        alt="Go"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/r/r-original.svg"
+                                        alt="R"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+                                        alt="JS"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
+                                        alt="React"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
+                                        alt="Tailwind"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
+                                        alt="Node.js"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg"
+                                        alt="Vite"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
+                                        alt="PostgreSQL"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"
+                                        alt="MySQL"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
+                                        alt="Docker"></div>
+                                <div class="marquee-item"><img
+                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg"
+                                        alt="Git"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="pt-12 pb-24 relative overflow-hidden">
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-500/10 blur-[120px] rounded-full -z-10 pointer-events-none">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div
+                    class="glass-card rounded-3xl p-8 md:p-16 text-center flex flex-col items-center gap-12 border border-white/10 fade-up">
+
+                    <div class="max-w-3xl">
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 tracking-tight">
+                            Let's Build Something <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-300">Impactful.</span>
+                        </h2>
+                        <p class="text-xl text-gray-400 mb-0">
+                            Are you looking for a dedicated developer to bring your digital vision to life? Or perhaps
+                            you need a reliable partner for your next web project? My inbox is always open.
+                        </p>
+                    </div>
+
+                    <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 fade-up" style="transition-delay: 0.2s;">
+                        <a href="mailto:alfakhri323@gmail.com"
+                            class="glass-card flex items-center gap-4 p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 group">
+                            <div
+                                class="bg-blue-500/20 p-3 rounded-full text-blue-500 group-hover:scale-110 transition-transform">
+                                <i data-lucide="mail" class="w-6 h-6"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-sm text-gray-400">Contact</p>
+                                <p class="text-lg font-medium text-white">Email</p>
+                            </div>
+                            <i data-lucide="arrow-up-right"
+                                class="w-5 h-5 text-gray-500 group-hover:text-white ml-auto transition-colors"></i>
+                        </a>
+
+                        <a href="www.linkedin.com/in/fatih-al-fakhri-muhammad-8245b3327" target="_blank"
+                            rel="noreferrer"
+                            class="glass-card flex items-center gap-4 p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 group">
+                            <div
+                                class="bg-[#0A66C2]/20 p-3 rounded-full text-[#0A66C2] group-hover:scale-110 transition-transform">
+                                <i data-lucide="linkedin" class="w-6 h-6"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-sm text-gray-400">Connect on</p>
+                                <p class="text-lg font-medium text-white">LinkedIn</p>
+                            </div>
+                            <i data-lucide="arrow-up-right"
+                                class="w-5 h-5 text-gray-500 group-hover:text-white ml-auto transition-colors"></i>
+                        </a>
+
+                        <a href="https://www.instagram.com/allfakhrii_/" target="_blank" rel="noreferrer"
+                            class="glass-card flex items-center gap-4 p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 group">
+                            <div
+                                class="bg-pink-500/20 p-3 rounded-full text-pink-500 group-hover:scale-110 transition-transform">
+                                <i data-lucide="instagram" class="w-6 h-6"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-sm text-gray-400">Follow on</p>
+                                <p class="text-lg font-medium text-white">Instagram</p>
+                            </div>
+                            <i data-lucide="arrow-up-right"
+                                class="w-5 h-5 text-gray-500 group-hover:text-white ml-auto transition-colors"></i>
+                        </a>
+
+                        <a href="https://open.spotify.com/user/59kr5gnugmapd20a53i93qv5n?si=71564671014e47c6"
+                            target="_blank" rel="noreferrer"
+                            class="glass-card flex items-center gap-4 p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 group">
+                            <div
+                                class="bg-green-500/20 p-3 rounded-full text-green-500 group-hover:scale-110 transition-transform">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.108 17.311c-.2.33-.635.433-.965.233-2.685-1.642-6.064-2.013-10.047-1.103-.377.086-.753-.146-.839-.523-.086-.377.146-.753.523-.839 4.358-.996 8.093-.574 11.095 1.258.33.2.433.635.233.974zm1.404-3.258c-.252.41-.783.542-1.193.29-3.003-1.845-7.582-2.38-11.12-1.303-.46.138-.95-.125-1.088-.585-.138-.46.125-.95.585-1.088 4.093-1.24 9.155-.633 12.52 1.432.41.252.542.783.296 1.154zm.13-3.352c-3.605-2.14-9.553-2.338-13.005-1.26-.554.168-1.144-.153-1.312-.707-.168-.554.153-1.144.707-1.312 3.97-1.205 10.543-.966 14.692 1.498.498.295.66.937.365 1.435-.295.498-.937.66-1.435.365l-.012-.018z" />
+                                </svg>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-sm text-gray-400">Listen on</p>
+                                <p class="text-lg font-medium text-white">Spotify</p>
+                            </div>
+                            <i data-lucide="arrow-up-right"
+                                class="w-5 h-5 text-gray-500 group-hover:text-white ml-auto transition-colors"></i>
+                        </a>
+
+
+                    </div>
+                </div>
+
+                <!-- Footer Bottom -->
+                <div
+                    class="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 fade-in">
+                    <p>© 2024 Al-Fakhri. All rights reserved.</p>
+                    <div class="flex items-center gap-2">
+                        <span>Built with</span>
+                        <span class="text-blue-500 font-medium">Vanilla HTML/JS</span>
+                        <span>&</span>
+                        <span class="text-blue-500 font-medium">Tailwind CSS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>

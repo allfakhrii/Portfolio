@@ -14,6 +14,7 @@ const logos = [
 export default function Preloader() {
   const [burst, setBurst] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [unmounted, setUnmounted] = useState(false);
 
   useEffect(() => {
     // 700ms for logo burst
@@ -27,10 +28,16 @@ export default function Preloader() {
       document.body.classList.add('loaded');
     }, 2400);
 
+    // 3600ms to completely unmount and free GPU resources
+    const unmountTimer = setTimeout(() => {
+      setUnmounted(true);
+    }, 3600);
+
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         setLoaded(true);
         document.body.classList.add('loaded');
+        setUnmounted(true);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -38,9 +45,12 @@ export default function Preloader() {
     return () => {
       clearTimeout(burstTimer);
       clearTimeout(loadTimer);
+      clearTimeout(unmountTimer);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+
+  if (unmounted) return null;
 
   return (
     <div id="preloader" style={{ pointerEvents: loaded ? 'none' : 'auto' }}>

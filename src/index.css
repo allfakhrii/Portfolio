@@ -165,4 +165,9 @@ body.loaded #preloader {
   clip-path: circle(0% at 50% 50%);
   transition: clip-path 1.1s cubic-bezier(0.77, 0, 0.175, 1);
   pointer-events: none;
+  visibility: hidden;
+}
+
+body.loaded #preloader::before {
+  animation: none !important;
 }

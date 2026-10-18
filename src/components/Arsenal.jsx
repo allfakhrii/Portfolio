@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Code2, Server, Database, Terminal, CheckCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const MARQUEE_LOGOS = [
   { name: 'Python', src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
@@ -38,38 +39,37 @@ const STACK_DOMAINS = [
     id: 'backend',
     title: 'Backend & Systems',
     icon: Server,
-    summary: 'Designing structured REST APIs, database schemas, and dependable micro-services.',
+    summary: 'Designing robust API services, concurrent application logic, and containerized runtime environments.',
     tools: [
-      { name: 'Node.js', role: 'Asynchronous event-driven server runtimes', tag: 'Runtime' },
-      { name: 'Go (Golang)', role: 'High-performance concurrent backend routines', tag: 'Language' },
-      { name: 'PostgreSQL', role: 'Relational data modeling & complex queries', tag: 'Database' },
-      { name: 'MySQL', role: 'Structured relational storage & optimization', tag: 'Database' },
-      { name: 'RESTful APIs', role: 'JSON HTTP endpoints with validation', tag: 'Protocol' },
+      { name: 'Go (Golang)', role: 'High-concurrency systems & microservices', tag: 'Language' },
+      { name: 'Node.js / Express', role: 'RESTful API endpoints & asynchronous services', tag: 'Runtime' },
+      { name: 'Docker', role: 'Application containerization & isolation', tag: 'DevOps' },
+      { name: 'REST & GraphQL', role: 'Contract-first client-server data protocols', tag: 'Protocol' },
     ]
   },
   {
-    id: 'datascience',
+    id: 'data',
     title: 'Data Science & Spatial Analytics',
     icon: Database,
-    summary: 'Computational data analysis, machine learning workflows, and geospatial manipulation from academic rigor.',
+    summary: 'Extracting actionable signals from tabular, geographical, and time-series environmental data.',
     tools: [
-      { name: 'Python', role: 'Data science scripting, automation & modeling', tag: 'Language' },
-      { name: 'Pandas & NumPy', role: 'Matrix operations & tabular data wrangling', tag: 'Data Prep' },
-      { name: 'Scikit-Learn', role: 'Predictive modeling & classification algorithms', tag: 'Machine Learning' },
-      { name: 'R Language', role: 'Statistical analysis and quantitative reporting', tag: 'Statistics' },
-      { name: 'GeoJSON / GIS', role: 'Spatial feature manipulation & coordinate data', tag: 'Geodata' },
+      { name: 'Python', role: 'Data manipulation, algorithmic modeling & pipelines', tag: 'Core' },
+      { name: 'Pandas & NumPy', role: 'High-performance vector operations & data frames', tag: 'Analysis' },
+      { name: 'Scikit-Learn', role: 'Predictive modeling, regression & classification', tag: 'ML' },
+      { name: 'R Language', role: 'Statistical hypothesis testing & academic research', tag: 'Statistics' },
+      { name: 'GeoPandas & QGIS', role: 'Vector spatial operations, buffer analysis & GIS', tag: 'Spatial' },
     ]
   },
   {
-    id: 'devops',
-    title: 'DevOps & Workflow',
+    id: 'storage',
+    title: 'Data Storage & Persistence',
     icon: Terminal,
-    summary: 'Standardized version control, containerized environments, and cloud deployment pipelines.',
+    summary: 'Engineering normalized relational schemas, query optimization, and persistent data integrity.',
     tools: [
-      { name: 'Git & GitHub', role: 'Version control, branching & code review', tag: 'VCS' },
-      { name: 'Docker', role: 'Isolated containerization for services', tag: 'Containers' },
-      { name: 'Vercel / Netlify', role: 'Edge deployment & CI/CD pipeline routing', tag: 'Cloud' },
-      { name: 'Figma', role: 'Interface wireframing & component specs', tag: 'Design' },
+      { name: 'PostgreSQL', role: 'Relational data modeling & complex queries', tag: 'SQL' },
+      { name: 'MySQL', role: 'Production transaction storage & indexing', tag: 'SQL' },
+      { name: 'Supabase', role: 'Serverless PostgreSQL & managed auth systems', tag: 'BaaS' },
+      { name: 'Git & GitHub', role: 'Distributed version control & CI/CD workflows', tag: 'Tooling' },
     ]
   }
 ];
@@ -82,11 +82,27 @@ export default function Arsenal() {
     : STACK_DOMAINS.filter((d) => d.id === activeDomain);
 
   return (
-    <section id="arsenal" className="py-24 bg-[#0c0e14] border-t border-white/[0.06] relative scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="arsenal" className="py-24 bg-[#0c0e14] border-t border-white/[0.06] relative scroll-mt-24 overflow-hidden">
+      
+      {/* Ambient background light */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full pointer-events-none opacity-40"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(37, 99, 235, 0.15) 0%, transparent 70%)',
+          transform: 'translate3d(0, 0, 0)'
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        {/* Section Header with Scroll Reveal */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
+        >
           <div>
             <span className="text-xs font-mono uppercase tracking-widest text-blue-400 block mb-3">
               03 / Technical Arsenal
@@ -100,7 +116,7 @@ export default function Arsenal() {
           </div>
 
           {/* Domain Filter Switcher */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-[#12141c] p-1.5 rounded-xl border border-white/5">
+          <div className="flex flex-wrap items-center gap-1.5 bg-[#12141c] p-1.5 rounded-xl border border-white/5 shadow-inner">
             <button
               onClick={() => setActiveDomain('all')}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
@@ -125,74 +141,88 @@ export default function Arsenal() {
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Domain Cards Grid */}
+        {/* Domain Cards Grid with Motion */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {displayedDomains.map((domain) => {
-            const IconComponent = domain.icon;
-            return (
-              <div
-                key={domain.id}
-                className="bg-[#11131a] border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-lg"
-              >
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-blue-950/60 border border-blue-500/20 text-blue-400 flex items-center justify-center">
-                      <IconComponent className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-heading font-bold text-white">
-                        {domain.title}
-                      </h3>
-                      <span className="text-xs font-mono text-zinc-500">
-                        {domain.tools.length} Production Technologies
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                    {domain.summary}
-                  </p>
-
-                  {/* Tool List */}
-                  <div className="space-y-3">
-                    {domain.tools.map((tool, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center justify-between p-3 rounded-xl bg-[#090a0f] border border-white/5 hover:border-white/10 transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <CheckCircle className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                          <div>
-                            <span className="text-sm font-semibold text-zinc-200 block">
-                              {tool.name}
-                            </span>
-                            <span className="text-xs text-zinc-400">
-                              {tool.role}
-                            </span>
-                          </div>
-                        </div>
-
-                        <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-white/5 border border-white/5 text-zinc-400 flex-shrink-0">
-                          {tool.tag}
+          <AnimatePresence mode="popLayout">
+            {displayedDomains.map((domain) => {
+              const IconComponent = domain.icon;
+              return (
+                <motion.div
+                  key={domain.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.35 }}
+                  whileHover={{ y: -6 }}
+                  className="bg-[#11131a] border border-white/10 hover:border-blue-500/30 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-lg transition-colors group"
+                >
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-blue-950/60 border border-blue-500/20 text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <IconComponent className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-heading font-bold text-white group-hover:text-blue-400 transition-colors">
+                          {domain.title}
+                        </h3>
+                        <span className="text-xs font-mono text-zinc-500">
+                          {domain.tools.length} Production Technologies
                         </span>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
 
-                <div className="pt-6 border-t border-white/[0.06] mt-6 flex items-center justify-between text-xs font-mono text-zinc-500">
-                  <span>Telkom University & Landexafy Stack</span>
-                  <span className="text-blue-400">Verified Skills</span>
-                </div>
-              </div>
-            );
-          })}
+                    <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
+                      {domain.summary}
+                    </p>
+
+                    {/* Tool List */}
+                    <div className="space-y-3">
+                      {domain.tools.map((tool, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-center justify-between p-3 rounded-xl bg-[#090a0f] border border-white/5 hover:border-white/10 hover:bg-white/[0.03] transition-all"
+                        >
+                          <div className="flex items-center gap-3">
+                            <CheckCircle className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                            <div>
+                              <span className="text-sm font-semibold text-zinc-200 block">
+                                {tool.name}
+                              </span>
+                              <span className="text-xs text-zinc-400">
+                                {tool.role}
+                              </span>
+                            </div>
+                          </div>
+
+                          <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-white/5 border border-white/5 text-zinc-400 flex-shrink-0">
+                            {tool.tag}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-6 border-t border-white/[0.06] mt-6 flex items-center justify-between text-xs font-mono text-zinc-500">
+                    <span>Telkom University & Landexafy Stack</span>
+                    <span className="text-blue-400">Verified Skills</span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
 
         {/* Continuous Tech Stack Marquee Strip */}
-        <div className="pt-8 border-t border-white/[0.08] relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="pt-8 border-t border-white/[0.08] relative"
+        >
           <div className="text-center mb-6">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">
               Continuous Toolchain Marquee
@@ -210,7 +240,7 @@ export default function Arsenal() {
                 {MARQUEE_LOGOS.map((logo, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#11131a] border border-white/5 hover:border-white/20 transition-all flex-shrink-0"
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#11131a] border border-white/5 hover:border-white/20 transition-all flex-shrink-0 hover:scale-105"
                   >
                     <img
                       src={logo.src}
@@ -229,7 +259,7 @@ export default function Arsenal() {
                 {MARQUEE_LOGOS.map((logo, index) => (
                   <div
                     key={`dup-${index}`}
-                    className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#11131a] border border-white/5 hover:border-white/20 transition-all flex-shrink-0"
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#11131a] border border-white/5 hover:border-white/20 transition-all flex-shrink-0 hover:scale-105"
                   >
                     <img
                       src={logo.src}
@@ -245,7 +275,7 @@ export default function Arsenal() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

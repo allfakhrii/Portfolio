@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowUpRight, Mail } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const NAV_ITEMS = [
   { label: 'Home', href: 'home' },
@@ -39,23 +40,19 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHome]);
 
-  // Lock body scroll when mobile menu is open & close on escape
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
-      const handleKeyDown = (e) => {
-        if (e.key === 'Escape') setMenuOpen(false);
-      };
-      window.addEventListener('keydown', handleKeyDown);
-      return () => {
-        document.body.style.overflow = 'auto';
-        window.removeEventListener('keydown', handleKeyDown);
-      };
     } else {
       document.body.style.overflow = 'auto';
     }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, [menuOpen]);
 
+  // Dynamic hash or page link
   const getHref = (id) => {
     return isHome ? `#${id}` : `/#${id}`;
   };
@@ -67,7 +64,12 @@ export default function Navbar() {
           scrolled ? 'py-3' : 'py-5'
         }`}
       >
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        <motion.div
+          initial={{ y: -25, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl mx-auto px-4 sm:px-6"
+        >
           <nav
             aria-label="Main Navigation"
             className={`flex items-center justify-between px-4 sm:px-5 py-2 rounded-2xl transition-all duration-300 ${
@@ -95,7 +97,7 @@ export default function Navbar() {
                   <a
                     key={item.href}
                     href={getHref(item.href)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 relative ${
                       isActive
                         ? 'bg-blue-600 text-white shadow-sm'
                         : 'text-zinc-400 hover:text-white hover:bg-white/[0.06]'
@@ -109,13 +111,15 @@ export default function Navbar() {
 
             {/* Desktop Right Action */}
             <div className="hidden md:flex items-center">
-              <a
+              <motion.a
                 href={getHref('contact')}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
               >
                 <span>Hire Me</span>
                 <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-              </a>
+              </motion.a>
             </div>
 
             {/* Mobile Hamburger Button */}
@@ -129,60 +133,69 @@ export default function Navbar() {
               {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </nav>
-        </div>
+        </motion.div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 z-40 bg-[#090a0f]/95 backdrop-blur-xl md:hidden transition-all duration-300 flex flex-col justify-between p-6 pt-24 ${
-          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        aria-hidden={!menuOpen}
-      >
-        <div className="flex flex-col space-y-2">
-          <p className="text-xs uppercase font-mono tracking-widest text-zinc-500 px-3 mb-2">
-            Navigation
-          </p>
-          {NAV_ITEMS.map((item) => {
-            const isActive = isHome && activeSection === item.href;
-            return (
-              <a
-                key={item.href}
-                href={getHref(item.href)}
-                onClick={() => setMenuOpen(false)}
-                className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-lg font-heading font-medium transition-colors ${
-                  isActive
-                    ? 'bg-blue-600 text-white'
-                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                }`}
-              >
-                <span>{item.label}</span>
-                <span className="text-xs font-mono opacity-60">#0{NAV_ITEMS.indexOf(item) + 1}</span>
-              </a>
-            );
-          })}
-        </div>
+      {/* Mobile Menu Overlay with AnimatePresence */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-[#090a0f]/95 backdrop-blur-xl md:hidden flex flex-col justify-between p-6 pt-24"
+            aria-hidden={!menuOpen}
+          >
+            <div className="flex flex-col space-y-2">
+              <p className="text-xs uppercase font-mono tracking-widest text-zinc-500 px-3 mb-2">
+                Navigation
+              </p>
+              {NAV_ITEMS.map((item, idx) => {
+                const isActive = isHome && activeSection === item.href;
+                return (
+                  <motion.a
+                    key={item.href}
+                    href={getHref(item.href)}
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    onClick={() => setMenuOpen(false)}
+                    className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-lg font-heading font-medium transition-colors ${
+                      isActive
+                        ? 'bg-blue-600 text-white'
+                        : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <span className="text-xs font-mono opacity-60">#0{NAV_ITEMS.indexOf(item) + 1}</span>
+                  </motion.a>
+                );
+              })}
+            </div>
 
-        {/* Mobile Menu Footer Details */}
-        <div className="border-t border-white/10 pt-6 mt-auto">
-          <p className="text-xs font-mono text-zinc-400 mb-3">Direct Inquiries</p>
-          <a
-            href="mailto:alfakhri323@gmail.com"
-            className="flex items-center gap-2 text-white font-medium hover:text-blue-400 transition-colors mb-4"
-          >
-            <Mail className="w-4 h-4 text-blue-500" />
-            <span>alfakhri323@gmail.com</span>
-          </a>
-          <a
-            href={getHref('contact')}
-            onClick={() => setMenuOpen(false)}
-            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-500 transition-colors"
-          >
-            <span>Start a Project</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
-        </div>
-      </div>
+            {/* Mobile Menu Footer Details */}
+            <div className="border-t border-white/10 pt-6 mt-auto">
+              <p className="text-xs font-mono text-zinc-400 mb-3">Direct Inquiries</p>
+              <a
+                href="mailto:alfakhri323@gmail.com"
+                className="flex items-center gap-2 text-white font-medium hover:text-blue-400 transition-colors mb-4"
+              >
+                <Mail className="w-4 h-4 text-blue-500" />
+                <span>alfakhri323@gmail.com</span>
+              </a>
+              <a
+                href={getHref('contact')}
+                onClick={() => setMenuOpen(false)}
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-500 transition-colors"
+              >
+                <span>Start a Project</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

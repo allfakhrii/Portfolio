@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Mail, Check, Copy, Send, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const LinkedinIcon = ({ className = "w-4 h-4" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -87,11 +88,27 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#090a0f] border-t border-white/[0.06] relative scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 bg-[#090a0f] border-t border-white/[0.06] relative scroll-mt-24 overflow-hidden">
+      
+      {/* Ambient background glow */}
+      <div
+        className="absolute bottom-0 right-0 w-[450px] h-[450px] rounded-full pointer-events-none opacity-35"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(37, 99, 235, 0.22) 0%, transparent 70%)',
+          transform: 'translate3d(0, 0, 0)'
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        {/* Section Header with Scroll Reveal */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="max-w-3xl mb-16"
+        >
           <span className="text-xs font-mono uppercase tracking-widest text-blue-400 block mb-3">
             04 / Collaboration & Inquiries
           </span>
@@ -101,15 +118,24 @@ export default function Contact() {
           <p className="text-zinc-400 text-base sm:text-lg leading-relaxed">
             Have a project in mind, need geospatial data integration, or seeking a full-stack engineer? Leave a message below or reach out via direct channels.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column: Direct Info & Social Connections */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-6"
+          >
             
             {/* Quick Email Copy Card */}
-            <div className="bg-[#11131a] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-lg">
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="bg-[#11131a] border border-white/10 hover:border-blue-500/30 rounded-2xl p-6 sm:p-8 shadow-lg transition-colors"
+            >
               <span className="text-xs font-mono uppercase text-zinc-400 block mb-2">Direct Channel</span>
               <h3 className="text-xl font-heading font-bold text-white mb-2">
                 alfakhri323@gmail.com
@@ -119,10 +145,12 @@ export default function Contact() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <button
+                <motion.button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-zinc-200 hover:text-white border border-white/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-zinc-200 hover:text-white border border-white/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shadow-sm"
                 >
                   {copied ? (
                     <>
@@ -135,17 +163,19 @@ export default function Contact() {
                       <span>Copy Email Address</span>
                     </>
                   )}
-                </button>
+                </motion.button>
 
-                <a
+                <motion.a
                   href="mailto:alfakhri323@gmail.com"
-                  className="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shadow-sm"
                 >
                   <Mail className="w-4 h-4" />
                   <span>Open Client</span>
-                </a>
+                </motion.a>
               </div>
-            </div>
+            </motion.div>
 
             {/* Social Links List */}
             <div className="bg-[#11131a] border border-white/10 rounded-2xl p-6 shadow-lg">
@@ -154,11 +184,12 @@ export default function Contact() {
               </span>
 
               <div className="space-y-3">
-                <a
+                <motion.a
                   href="https://www.linkedin.com/in/fatih-al-fakhri-muhammad-8245b3327"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-xl bg-[#0c0d12] border border-white/5 hover:border-blue-500/30 text-zinc-300 hover:text-white transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  whileHover={{ x: 4 }}
+                  className="flex items-center justify-between p-3.5 rounded-xl bg-[#0c0d12] border border-white/5 hover:border-blue-500/30 text-zinc-300 hover:text-white transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shadow-sm"
                   aria-label="Connect on LinkedIn"
                 >
                   <div className="flex items-center gap-3">
@@ -169,13 +200,14 @@ export default function Contact() {
                     </div>
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
+                </motion.a>
 
-                <a
+                <motion.a
                   href="https://github.com/alfakhrii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-xl bg-[#0c0d12] border border-white/5 hover:border-blue-500/30 text-zinc-300 hover:text-white transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  whileHover={{ x: 4 }}
+                  className="flex items-center justify-between p-3.5 rounded-xl bg-[#0c0d12] border border-white/5 hover:border-blue-500/30 text-zinc-300 hover:text-white transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shadow-sm"
                   aria-label="Explore GitHub repositories"
                 >
                   <div className="flex items-center gap-3">
@@ -186,13 +218,14 @@ export default function Contact() {
                     </div>
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
+                </motion.a>
 
-                <a
+                <motion.a
                   href="https://www.instagram.com/allfakhrii_/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-xl bg-[#0c0d12] border border-white/5 hover:border-blue-500/30 text-zinc-300 hover:text-white transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  whileHover={{ x: 4 }}
+                  className="flex items-center justify-between p-3.5 rounded-xl bg-[#0c0d12] border border-white/5 hover:border-blue-500/30 text-zinc-300 hover:text-white transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shadow-sm"
                   aria-label="Follow on Instagram"
                 >
                   <div className="flex items-center gap-3">
@@ -203,14 +236,20 @@ export default function Contact() {
                     </div>
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
+                </motion.a>
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* Right Column: Interactive Inquiry Form */}
-          <div className="lg:col-span-7 bg-[#11131a] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 bg-[#11131a] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-xl"
+          >
             
             <div className="flex items-center gap-2 mb-6">
               <MessageSquare className="w-5 h-5 text-blue-400" />
@@ -254,8 +293,8 @@ export default function Contact() {
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       placeholder="e.g. Sarah Jenkins"
-                      className={`w-full px-4 py-3 rounded-xl bg-[#090a0f] border text-sm text-white placeholder-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
-                        errors.name ? 'border-red-500' : 'border-white/10'
+                      className={`w-full px-4 py-3 rounded-xl bg-[#090a0f] border text-sm text-white placeholder-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-colors ${
+                        errors.name ? 'border-red-500' : 'border-white/10 focus:border-blue-500'
                       }`}
                     />
                     {errors.name && (
@@ -273,8 +312,8 @@ export default function Contact() {
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                       placeholder="e.g. sarah@company.com"
-                      className={`w-full px-4 py-3 rounded-xl bg-[#090a0f] border text-sm text-white placeholder-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
-                        errors.email ? 'border-red-500' : 'border-white/10'
+                      className={`w-full px-4 py-3 rounded-xl bg-[#090a0f] border text-sm text-white placeholder-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-colors ${
+                        errors.email ? 'border-red-500' : 'border-white/10 focus:border-blue-500'
                       }`}
                     />
                     {errors.email && (
@@ -317,8 +356,8 @@ export default function Contact() {
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                     placeholder="Describe your timeline, project requirements, or ideas..."
-                    className={`w-full px-4 py-3 rounded-xl bg-[#090a0f] border text-sm text-white placeholder-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
-                      errors.message ? 'border-red-500' : 'border-white/10'
+                    className={`w-full px-4 py-3 rounded-xl bg-[#090a0f] border text-sm text-white placeholder-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-colors ${
+                      errors.message ? 'border-red-500' : 'border-white/10 focus:border-blue-500'
                     }`}
                   ></textarea>
                   {errors.message && (
@@ -327,10 +366,12 @@ export default function Contact() {
                 </div>
 
                 {/* Submit Button */}
-                <button
+                <motion.button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 disabled:opacity-50"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-[0_4px_15px_rgba(37,99,235,0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 disabled:opacity-50"
                 >
                   {status === 'submitting' ? (
                     <>
@@ -343,12 +384,12 @@ export default function Contact() {
                       <span>Send Project Inquiry</span>
                     </>
                   )}
-                </button>
+                </motion.button>
 
               </form>
             )}
 
-          </div>
+          </motion.div>
 
         </div>
 

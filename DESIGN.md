@@ -9,7 +9,7 @@
 ## 2. Design Dials
 - **ENERGY:** 2 (Balanced - confident, professional, tech-forward, refined)
 - **RHYTHM:** 2 (Structured grid with deliberate asymmetry between flagship projects, dense technical specs, and focused content)
-- **MOTION:** 2 (Smooth entrance reveals, tactile button states, tab transitions; strictly no endless distracting loops)
+- **MOTION:** 3 (Rich interactive motion: framer-motion scroll reveals, animated ambient orbs, card hover lifts, modal spring physics, and radar pings per explicit user directive)
 
 ## 3. Color Palette & Materials
 - **Core Neutral Base (Dark):** Obsidian `#090a0f` and Surface Slate `#11131a`
@@ -31,3 +31,4 @@
 ## 6. Explicit User Overrides (R-37 Protocol)
 - **Continuous Tech Stack Marquee:** The owner explicitly requested a continuous scrolling marquee of programming toolchain logos in the Arsenal section (`MARQUEE_LOGOS`), paused on hover with edge gradient masks.
 - **Logo Burst Preloader:** The owner explicitly preferred the signature burst preloader featuring radial logo expansion (`animate-burst`), animated headline typography, and circular clip-path reveal.
+- **Rich Motion & Fluid Animations:** The owner explicitly requested extensive animations ("last banyakin animasiii, biar bagus"). Integrated Framer Motion staggered entrance animations on scroll, ambient glowing light drift, card hover physics, spring modals, and radar pulses across all sections.

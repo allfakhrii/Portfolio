@@ -1,93 +1,137 @@
-import { useRef, useEffect, useState } from 'react';
-import { motion, useInView, animate } from 'framer-motion';
-
-function AnimatedCounter({ from = 0, to, duration = 2 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [count, setCount] = useState(from);
-
-  useEffect(() => {
-    if (isInView) {
-      const controls = animate(from, to, {
-        duration: duration,
-        ease: "easeOut",
-        onUpdate: (value) => setCount(Math.floor(value))
-      });
-      return () => controls.stop();
-    }
-  }, [isInView, from, to, duration]);
-
-  return <span ref={ref}>{count}</span>;
-}
+import { GraduationCap, Briefcase, MapPin, Code, Cpu } from 'lucide-react';
 
 export default function About() {
   return (
-    <section id="about" className="py-24 relative">
+    <section id="about" className="py-24 bg-[#0c0e14] border-t border-white/[0.06] relative scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">The Journey So Far.</h2>
-          <div className="w-20 h-1 bg-blue-500 rounded-full"></div>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6 text-lg text-gray-400 leading-relaxed order-2 lg:order-1"
-          >
-            <p>
-              My journey into technology began at MAN Purbalingga, where my curiosity for how things work first took root. Today, as a <span className="text-white font-medium">Data Science student at Telkom University Purwokerto</span>, I've developed a strong analytical mindset and a deep understanding of logical problem-solving.
-            </p>
-            <p>
-              However, I realized that even the best logic needs a beautiful interface to truly make an impact. That realization led me to dive deep into Full-stack Development and establish <span className="text-blue-500 font-semibold">Landexafy</span>.
-            </p>
-            <p>
-              My team and I focus on helping businesses translate their visions into digital products that are not only aesthetically pleasing but also highly functional and user-centric.
-            </p>
-
-            <div className="pt-6 grid grid-cols-2 gap-6">
-              <div>
-                <h4 className="text-3xl font-heading font-bold text-white mb-2">
-                  <AnimatedCounter to={2} />+
-                </h4>
-                <p className="text-sm text-gray-500 uppercase tracking-wider">Years Experience</p>
-              </div>
-              <div>
-                <h4 className="text-3xl font-heading font-bold text-white mb-2">
-                  <AnimatedCounter to={20} />+
-                </h4>
-                <p className="text-sm text-gray-500 uppercase tracking-wider">Projects Completed</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative max-w-[320px] mx-auto lg:ml-auto group order-1 lg:order-2"
-          >
-            {/* Profile Image with Organic Shape */}
-            <div className="aspect-square glass p-1 relative z-10 overflow-hidden transition-all duration-700 rounded-full hover:rounded-[2rem]">
-              <div className="w-full h-full bg-zinc-800 rounded-[inherit] overflow-hidden relative border border-white/5">
-                <img src="/pp-cswnprmi.png" alt="Founder's Portrait" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-              </div>
-            </div>
-            {/* Decorative Ornaments */}
-            <div className="absolute top-3 -right-3 w-full h-full border border-blue-500/20 rounded-full -z-10 transition-all duration-700 group-hover:rounded-[2rem]"></div>
-            <div className="absolute -bottom-6 left-6 w-3/4 h-3/4 bg-blue-500/10 blur-3xl rounded-full -z-20"></div>
-          </motion.div>
+        
+        {/* Section Header */}
+        <div className="mb-16 max-w-3xl">
+          <span className="text-xs font-mono uppercase tracking-widest text-blue-400 block mb-3">
+            01 / Background & Philosophy
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white tracking-tight mb-4">
+            Where Data Analytics Meets Functional Web Engineering.
+          </h2>
+          <p className="text-zinc-400 text-base sm:text-lg leading-relaxed">
+            A synthesis of algorithmic thinking from Data Science and modern software architecture for production-ready web platforms.
+          </p>
         </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          {/* Left Column: Portrait & Quick Credentials */}
+          <div className="lg:col-span-5 flex flex-col gap-6">
+            
+            <div className="bg-[#12141c] border border-white/10 rounded-2xl p-3 shadow-xl">
+              <div className="aspect-[4/5] rounded-xl overflow-hidden relative bg-zinc-900 border border-white/5">
+                <img
+                  src="/pp-cswnprmi.png"
+                  alt="Portrait of Fatih Al-Fakhri Muhammad"
+                  className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090a0f] via-transparent to-transparent opacity-80 pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 text-left">
+                  <p className="text-xs font-mono uppercase tracking-wider text-blue-400">Full-stack & Data</p>
+                  <p className="text-lg font-heading font-bold text-white">Fatih Al-Fakhri Muhammad</p>
+                </div>
+              </div>
+
+              {/* Verified Identity Tags */}
+              <div className="mt-4 px-2 space-y-2">
+                <div className="flex items-center gap-2.5 text-xs text-zinc-300 font-mono">
+                  <MapPin className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
+                  <span>Purwokerto & Purbalingga, Central Java, Indonesia</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs text-zinc-300 font-mono">
+                  <Briefcase className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
+                  <span>Full Stack Developer, Landexafy</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs text-zinc-300 font-mono">
+                  <Briefcase className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
+                  <span>Data & IT Specialist, JP & CO</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs text-zinc-300 font-mono">
+                  <GraduationCap className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
+                  <span>Data Science, Telkom University Purwokerto</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: In-depth Journey & Core Principles */}
+          <div className="lg:col-span-7 space-y-8 text-zinc-300 text-base leading-relaxed">
+            
+            <div className="space-y-4">
+              <h3 className="text-xl font-heading font-semibold text-white">
+                The Journey from Logic to Interface
+              </h3>
+              <p>
+                My passion for computing took shape at MAN Purbalingga, where exploring algorithms first opened the door to technology. As a <span className="text-white font-medium">Data Science student at Telkom University Purwokerto</span>, I have spent years training my analytical intuition: statistical modeling, computational data structures, and spatial geometry.
+              </p>
+              <p>
+                However, data and raw logic without an intuitive interface remain invisible to the people who need them most. That realization pushed me into Full-stack Engineering: transforming complex datasets, API architectures, and business workflows into fast, accessible, and dependable digital products.
+              </p>
+              <p>
+                Currently, I contribute as a <span className="text-white font-medium">Full Stack Developer at Landexafy</span> and a <span className="text-white font-medium">Data & IT Specialist at JP & CO</span>, bridging real-world IT infrastructure, analytics pipelines, and production web systems for commercial and research applications.
+              </p>
+            </div>
+
+            {/* Three Pillar Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-white/[0.08]">
+              
+              <div className="bg-[#12141c] border border-white/5 rounded-xl p-5">
+                <div className="w-8 h-8 rounded-lg bg-blue-950/60 border border-blue-500/20 text-blue-400 flex items-center justify-center mb-3">
+                  <Code className="w-4 h-4" />
+                </div>
+                <h4 className="text-sm font-semibold text-white mb-1.5">Full-Stack Development</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Building modular, maintainable client apps with React and Next.js, backed by structured APIs and clean database models.
+                </p>
+              </div>
+
+              <div className="bg-[#12141c] border border-white/5 rounded-xl p-5">
+                <div className="w-8 h-8 rounded-lg bg-blue-950/60 border border-blue-500/20 text-blue-400 flex items-center justify-center mb-3">
+                  <Cpu className="w-4 h-4" />
+                </div>
+                <h4 className="text-sm font-semibold text-white mb-1.5">Data & GIS Applications</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Specializing in geospatial visualization (Leaflet/GIS), Python data pipelines, and telemetry dashboards for specialized fields.
+                </p>
+              </div>
+
+            </div>
+
+            {/* Verified Track Record Strip */}
+            <div className="bg-[#12141c] border border-white/5 rounded-xl p-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div>
+                <p className="text-xl font-heading font-bold text-white mb-1">Landexafy</p>
+                <p className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Full Stack Dev</p>
+                <span className="text-[11px] text-zinc-500 block mt-1">Web applications & studio</span>
+              </div>
+              <div>
+                <p className="text-xl font-heading font-bold text-white mb-1">JP & CO</p>
+                <p className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Data & IT Specialist</p>
+                <span className="text-[11px] text-zinc-500 block mt-1">IT systems & data workflows</span>
+              </div>
+              <div>
+                <p className="text-xl font-heading font-bold text-white mb-1">Telkom Univ</p>
+                <p className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Data Science</p>
+                <span className="text-[11px] text-zinc-500 block mt-1">Academic degree track</span>
+              </div>
+              <div>
+                <p className="text-xl font-heading font-bold text-white mb-1">8+ Apps</p>
+                <p className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Live In Production</p>
+                <span className="text-[11px] text-zinc-500 block mt-1">Client & research projects</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
     </section>
   );

@@ -1,8 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, ArrowUpRight, Mail } from 'lucide-react';
+
+const NAV_ITEMS = [
+  { label: 'Home', href: 'home' },
+  { label: 'About', href: 'about' },
+  { label: 'Works', href: 'works' },
+  { label: 'Arsenal', href: 'arsenal' },
+  { label: 'Contact', href: 'contact' },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
@@ -10,110 +20,169 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      if (isHome) {
+        const sections = ['home', 'about', 'works', 'arsenal', 'contact'];
+        const scrollPosition = window.scrollY + 200;
+
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const sectionEl = document.getElementById(sections[i]);
+          if (sectionEl && sectionEl.offsetTop <= scrollPosition) {
+            setActiveSection(sections[i]);
+            break;
+          }
+        }
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHome]);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  // Lock body scroll when mobile menu is open & close on escape
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') setMenuOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = 'auto';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [menuOpen]);
 
-  const getHref = (item) => {
-    const hash = `#${item.toLowerCase()}`;
-    return isHome ? hash : `/${hash}`;
+  const getHref = (id) => {
+    return isHome ? `#${id}` : `/#${id}`;
   };
 
   return (
     <>
-      <nav
-        id="navbar"
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          scrolled ? 'py-4' : 'py-6'
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out ${
+          scrolled ? 'py-3' : 'py-5'
         }`}
       >
-        <div 
-          className={`mx-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            scrolled 
-              ? 'max-w-4xl mx-4 md:mx-auto px-6 py-3 apple-glass rounded-full' 
-              : 'max-w-7xl px-4 sm:px-6 lg:px-8 bg-transparent border border-transparent'
-          }`}
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex-shrink-0">
-              <Link to="/" className="font-heading font-bold text-2xl tracking-tighter text-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <nav
+            aria-label="Main Navigation"
+            className={`flex items-center justify-between px-4 sm:px-5 py-2 rounded-2xl transition-all duration-300 ${
+              scrolled
+                ? 'bg-[#10121a]/90 backdrop-blur-md border border-white/10 shadow-[0_12px_36px_rgba(0,0,0,0.5)]'
+                : 'bg-[#10121a]/60 backdrop-blur-md border border-white/[0.08] shadow-[0_8px_24px_rgba(0,0,0,0.25)]'
+            }`}
+          >
+            {/* Brand Logo */}
+            <Link
+              to="/"
+              className="group flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg py-1 px-1.5"
+              aria-label="Al-Fakhri Home"
+            >
+              <span className="font-heading font-bold text-lg sm:text-xl tracking-tight text-white group-hover:text-blue-400 transition-colors">
                 Al-Fakhri<span className="text-blue-500">.</span>
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                {['Home', 'About', 'Works', 'Arsenal', 'Contact'].map((item) => (
+            {/* Desktop Navigation Links */}
+            <div className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/[0.06] rounded-full p-1">
+              {NAV_ITEMS.map((item) => {
+                const isActive = isHome && activeSection === item.href;
+                return (
                   <a
-                    key={item}
-                    href={getHref(item)}
-                    className="text-gray-300 hover:text-white transition-colors px-3 py-2 rounded-full text-sm font-medium hover:bg-white/10"
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button
-                onClick={toggleMenu}
-                className="inline-flex items-center justify-center p-2 rounded-md text-white transition-colors relative z-[101]"
-              >
-                <span className="hamburger-box w-[30px] h-[20px] inline-block relative">
-                  <span
-                    className={`hamburger-inner block absolute top-1/2 mt-[-1px] w-[30px] h-[2px] bg-white rounded transition-all duration-300 ${
-                      menuOpen ? 'bg-transparent' : ''
+                    key={item.href}
+                    href={getHref(item.href)}
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                      isActive
+                        ? 'bg-blue-600 text-white shadow-sm'
+                        : 'text-zinc-400 hover:text-white hover:bg-white/[0.06]'
                     }`}
                   >
-                    <span
-                      className={`content-[''] block absolute w-[30px] h-[2px] bg-white rounded transition-all duration-300 ${
-                        menuOpen ? 'top-0 rotate-45' : '-top-2'
-                      }`}
-                    ></span>
-                    <span
-                      className={`content-[''] block absolute w-[30px] h-[2px] bg-white rounded transition-all duration-300 ${
-                        menuOpen ? 'bottom-0 -rotate-45' : '-bottom-2'
-                      }`}
-                    ></span>
-                  </span>
-                </span>
-              </button>
+                    {item.label}
+                  </a>
+                );
+              })}
             </div>
-          </div>
-        </div>
 
-        {/* Mobile Menu Fullscreen Overlay */}
-        <div
-          className={`fixed inset-0 bg-[#09090b]/95 backdrop-blur-xl z-[100] md:hidden transition-opacity duration-300 ${
-            menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          } flex flex-col items-center justify-center space-y-8`}
-        >
-          {/* Background Decoration */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-500/20 rounded-full blur-[100px] -z-10 animate-pulse"></div>
+            {/* Desktop Right Action */}
+            <div className="hidden md:flex items-center">
+              <a
+                href={getHref('contact')}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              >
+                <span>Hire Me</span>
+                <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+              </a>
+            </div>
 
-          {['Home', 'About', 'Works', 'Arsenal', 'Contact'].map((item, index) => (
-            <a
-              key={item}
-              href={getHref(item)}
-              onClick={() => setMenuOpen(false)}
-              className="text-3xl font-heading font-bold text-gray-300 hover:text-blue-500 transition-colors"
-              style={{
-                transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
-                opacity: menuOpen ? 1 : 0,
-                transitionDelay: `${index * 100}ms`
-              }}
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-colors"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
             >
-              {item}
-            </a>
-          ))}
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </nav>
         </div>
-      </nav>
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 z-40 bg-[#090a0f]/95 backdrop-blur-xl md:hidden transition-all duration-300 flex flex-col justify-between p-6 pt-24 ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden={!menuOpen}
+      >
+        <div className="flex flex-col space-y-2">
+          <p className="text-xs uppercase font-mono tracking-widest text-zinc-500 px-3 mb-2">
+            Navigation
+          </p>
+          {NAV_ITEMS.map((item) => {
+            const isActive = isHome && activeSection === item.href;
+            return (
+              <a
+                key={item.href}
+                href={getHref(item.href)}
+                onClick={() => setMenuOpen(false)}
+                className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-lg font-heading font-medium transition-colors ${
+                  isActive
+                    ? 'bg-blue-600 text-white'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <span>{item.label}</span>
+                <span className="text-xs font-mono opacity-60">#0{NAV_ITEMS.indexOf(item) + 1}</span>
+              </a>
+            );
+          })}
+        </div>
+
+        {/* Mobile Menu Footer Details */}
+        <div className="border-t border-white/10 pt-6 mt-auto">
+          <p className="text-xs font-mono text-zinc-400 mb-3">Direct Inquiries</p>
+          <a
+            href="mailto:alfakhri323@gmail.com"
+            className="flex items-center gap-2 text-white font-medium hover:text-blue-400 transition-colors mb-4"
+          >
+            <Mail className="w-4 h-4 text-blue-500" />
+            <span>alfakhri323@gmail.com</span>
+          </a>
+          <a
+            href={getHref('contact')}
+            onClick={() => setMenuOpen(false)}
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-500 transition-colors"
+          >
+            <span>Start a Project</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
     </>
   );
 }
